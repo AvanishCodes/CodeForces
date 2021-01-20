@@ -1,0 +1,12 @@
+#include<iostream>
+using namespace std;
+void testcase(){
+    
+}
+int main(){
+    int t;
+    cin>>t;
+    while(t--)
+        testcase();
+    return 0;
+}
