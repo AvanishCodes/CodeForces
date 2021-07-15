@@ -1,133 +1,62 @@
-// Below is C/C++ code for input/output
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+#include <map>
+#include <cmath>
+#include <math.h>
+#include <set>
+#include <queue>
+#include <stack>
+#include <bitset>
+#include <random>
+#include <unordered_map>
+#include <unordered_set>
+#include <fstream>
+#include <iomanip>
+#include <numeric>
+#include <complex>
+#include <assert.h>
+#define ll long long int
+#define mod 1000000007
+#define vi vector<int>
+#define vll vector<ll>
+#define rep(i, n) for (int i = 0; i < n; i++)
+#define read(v, n)            \
+  for (int i = 0; i < n; i++) \
+    cin >> v[i];
+#define print(v, n)           \
+  for (int i = 0; i < n; i++) \
+    cout << v[i] << " ";
+#define pb push_back
+#define fr first
+#define se second
 using namespace std;
 
-#define read(type) readInt<type>()           // read an Integer fastly
-#define write(type) writeInt<type>()         // Write an integer fastly
-#define SCD(t) scanf("%d", &t)               // Scan a decimal Number
-#define SCLD(t) scanf("%ld", &t)             // Scan a long decimal Number
-#define SCLLD(t) scanf("%lld", &t)           // Scan a long long decimal Number
-#define SCC(t) scanf("%c", &t)               // Scan a character
-#define SCS(t) scanf("%s", t)                // Scan a string
-#define SCF(t) scanf("%f", &t)               // Scan a floating point number
-#define SCLF(t) scanf("%lf", &t)             // Scan a long floating point number
-#define MP make_pair                         // Make pair
-#define PB push_back                         // Push back to a container
-#define EB emplace_back                      // Emplace back to a container(faster and more efficient method)
-#define INF (int)1e9                         // Works as infinite for integers
-#define PI 3.1415926535897932384626433832795 // Decimal value of PI
-#define MOD 1000000007                       // Modulo value for most of the mathematical problems
-#define mod MOD                              // So that modulo value works in either case
-#define F first                              // First Element of a pair
-#define S second                             // Second Element of a pair
-typedef pair<int, int> PII;                  // Pair of integer and integer
-typedef vector<int> VI;                      // Vector of Integers
-typedef vector<string> VS;                   // Vector of Strings
-typedef vector<PII> VII;                     // Vector of pairs of Integer and Integer
-typedef vector<VI> VVI;                      // Vector of Vectors of Integers
-typedef map<int, int> MPII;                  // Map of Integers and Integers
-typedef set<int> SETI;                       // set of Integers
-#define fn for (int i = 0; i < n; i++)
-
-/* Inline functions */
-// Check if a number is even
-inline bool isEven(int a)
+void solve()
 {
-  if (a & 1)
-    return false;
-  return true;
-}
-// Check if the number is odd
-inline bool isOdd(int a)
-{
-  if (a & 1)
-    return true;
-  return false;
-}
-// Get the most significant digit of a decimal number
-inline int MSD(int N)
-{
-  return floor(log10(N));
-}
-// Check if the number is a power of 2
-inline bool isPowerOf2(int N)
-{
-  return N && (!(N & (N - 1)));
-}
-/* End of Inline Functions */
-
-template <typename T>
-inline void writeInt(T x) // Write an integer on console
-{
-  int i = 20;
-  char buf[21];
-  // buf[10] = 0;
-  buf[20] = '\n';
-  do
-  {
-    buf[--i] = x % 10 + '0';
-    x /= 10;
-  } while (x);
-  do
-  {
-    putchar(buf[i]);
-  } while (buf[i++] != '\n');
-}
-
-template <typename T>
-inline T readInt() // Read an Integer
-{
-  T n = 0, s = 1;
-  char p = getchar();
-  if (p == '-')
-    s = -1;
-  while ((p < '0' || p > '9') && p != EOF && p != '-')
-    p = getchar();
-  if (p == '-')
-    s = -1, p = getchar();
-  while (p >= '0' && p <= '9')
-  {
-    n = (n << 3) + (n << 1) + (p - '0');
-    p = getchar();
-  }
-  return n * s;
-}
-
-// Test Case function
-void testCase()
-{
-  int n, a, b, maxValue = 0;
+  int n, a, b;
   cin >> n >> a >> b;
-  // n = read(int);
-  // a = read(int);
-  // b = read(int);
   string s;
   cin >> s;
-  // cout << n << a << b << '\n';
-  if (a <= b)
-  {
-    cout << n * (a + b) << endl;
-    return;
-  }
-  int c0 = count(s.begin(), s.end(), '0');
-  int c1 = count(s.begin(), s.end(), '1');
-  int maxm = 0;
-  if (c0 == n || c1 == n)
-  {
-    if (b < 0)
-      maxm = n * a + b;
-    maxm = max(maxm, max(n * (a + b), a * n + b));
-    cout << maxm << endl;
-  }
-  if (b < 0)
-  {
-    
-  }
-  // cout << " Build Successfull\n";
-  return;
+  int cnt = 1;
+  for (int i = 1; i < n; i++)
+    if (s[i] == s[i - 1])
+      continue;
+    else
+      cnt++;
+  // Below is a fixed component for all the test cases
+  int ans = n * a;
+  // if b is positive, simply add b for each binary character
+  if (b >= 0)
+    ans += n * b;
+  // if b is not positive, then we need to minimize the number of partitions
+  // Minimum number of partitions is :
+  // partition of nummber forming lesser number of partitions + 1
+  else
+    ans += ((cnt + 2) / 2) * b;
+  cout << ans << "\n";
 }
-
-// Code entry
 int main()
 {
   // fast I/O
@@ -139,13 +68,10 @@ int main()
   freopen("input.txt", "r", stdin);
   // Printing the Output to output.txt file
   freopen("output.txt", "w", stdout);
-#else
-  // online submission
 #endif
-  int tc = 1; // For number of test cases
-  cin >> tc;  // Hide this line if there is only one test case
-  // tc = read(int);
-  while (tc--) // For each test case
-    testCase();
+  int t = 1;
+  cin >> t;
+  for (int i = 1; i <= t; i++)
+    solve();
   return 0;
 }
