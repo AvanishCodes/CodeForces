@@ -11,6 +11,8 @@
 
 ### Above combination will ignore all files without extension ###
 
-
 \input.txt
 \output.txt
+
+temp.cpp
+temp.py
