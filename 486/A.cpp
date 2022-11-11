@@ -11,6 +11,6 @@ int main()
     }
     // cout << ((int)(n / 2)) + (-n);
     // n -= 1;
-    long long unsigned temp = ((n + 1) / 2) * (-1);
+    long long temp = ((n + 1) / 2) * (-1);
     cout << temp;
 }
